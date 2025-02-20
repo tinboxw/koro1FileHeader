@@ -42,12 +42,17 @@ function updateFileNameArr (fileNameArr, fileName) {
   return fileNameArr
 }
 
+function getEditorByFilePath (filePath) {
+  const editors = vscode.window.visibleTextEditors
+  return editors.find(editor => editor.document.uri.fsPath === filePath)
+}
+
 function watchSaveFn () {
   let fileNameArr = [] // 保存最近操作的文件
   // 文件保存时 触发
   vscode.workspace.onWillSaveTextDocument((file) => {
     if (!file.document.isDirty) return // 文件没有修改 不操作
-    const editor = vscode.editor || vscode.window.activeTextEditor
+    const editor = getEditorByFilePath(file.document.uri.fsPath)
     const config = vscode.workspace.getConfiguration('fileheader')
     try {
       fileNameArr = updateFileNameArr(fileNameArr, file.document.fileName)
@@ -101,9 +106,9 @@ function documentSaveFn (config, editor) {
     }
     const isAutoAdd = isAutoAddFn(params)
     if (isAutoAdd) {
-      global.autoAddFiles.push(params.fsPath)
-      const editor = vscode.editor || vscode.window.activeTextEditor // 每次运行选中文件
+      const editor = getEditorByFilePath(params.fsPath) // 每次运行选中文件
       createAnnotation.headerAnnotation(editor)
+      global.autoAddFiles.push(params.fsPath)
     }
   }
 
