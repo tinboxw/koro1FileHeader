@@ -35,7 +35,7 @@ function saveReplaceTime (document, config, fileEnd) {
     FilePathRange,
     FilePathText
   const changeFont = new languageOutput.ChangeFont(fileEnd)
-  const annotationStarts = changeFont.star()
+  const annotationStarts = changeFont.star().trim() // Trim whitespace characters
   const totalLine = document.lineCount - 1 // 总行数
   let enter = false
   let hasAnnotation = false // 默认没有
