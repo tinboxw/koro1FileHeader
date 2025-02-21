@@ -1,9 +1,9 @@
 {
-  "name": "korofileheader",
-  "displayName": "koroFileHeader",
-  "description": "用于生成文件头部注释和函数注释的插件，支持所有主流语言,功能强大，灵活方便，文档齐全，食用简单！",
+  "name": "korofileheader-tinbox",
+  "displayName": "koroFileHeader-tinbox",
+  "description": "fork to koroFileHeader, 修复重复添加文件头注释的bug。用于生成文件头部注释和函数注释的插件，支持所有主流语言,功能强大，灵活方便，文档齐全，食用简单！",
   "version": "4.9.3",
-  "publisher": "OBKoro1",
+  "publisher": "tinbox",
   "scripts": {
     "build": "vsce package",
     "postinstall": "node ./node_modules/vscode/bin/install",
@@ -341,6 +341,6 @@
     "vscode": "^1.1.37"
   },
   "dependencies": {
-    "moment": "^2.29.1"
+    "moment": "^2.29.4"
   }
 }
